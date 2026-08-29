@@ -34,3 +34,8 @@ resource "yandex_resourcemanager_folder_iam_member" "terraform_sa_vpc_admin" {
   role      = "vpc.admin"
   member    = "serviceAccount:${yandex_iam_service_account.terraform_sa.id}"
 }
+resource "yandex_resourcemanager_folder_iam_member" "terraform_sa_compute_editor" {
+  folder_id = var.folder_id
+  role      = "compute.editor"
+  member    = "serviceAccount:${yandex_iam_service_account.terraform_sa.id}"
+}

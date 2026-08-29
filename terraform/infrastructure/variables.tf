@@ -38,3 +38,68 @@ variable "subnets" {
     }
   }
 }
+variable "admin_cidr" {
+  description = "Public IP address allowed for SSH and Kubernetes API access"
+  type        = string
+}
+
+
+variable "k8s_nodes" {
+  description = "Kubernetes cluster nodes"
+
+  type = map(object({
+    hostname    = string
+    subnet      = string
+    cores       = number
+    memory      = number
+    disk_size   = number
+    preemptible = bool
+    role        = string
+  }))
+
+  default = {
+    control-plane = {
+      hostname    = "k8s-control-plane"
+      subnet      = "a"
+      cores       = 2
+      memory      = 4
+      disk_size   = 20
+      preemptible = false
+      role        = "control-plane"
+    }
+
+    worker-1 = {
+      hostname    = "k8s-worker-1"
+      subnet      = "b"
+      cores       = 2
+      memory      = 4
+      disk_size   = 20
+      preemptible = true
+      role        = "worker"
+    }
+
+    worker-2 = {
+      hostname    = "k8s-worker-2"
+      subnet      = "d"
+      cores       = 2
+      memory      = 4
+      disk_size   = 20
+      preemptible = true
+      role        = "worker"
+    }
+  }
+}
+
+
+
+variable "ssh_public_key_path" {
+  description = "Path to SSH public key"
+  type        = string
+  default     = "~/.ssh/id_ed25519.pub"
+}
+
+variable "ssh_user" {
+  description = "SSH user for Kubernetes nodes"
+  type        = string
+  default     = "ubuntu"
+}

@@ -12,6 +12,9 @@
 kubeconfig
 .kube/
 
+# Kubespray generated artifacts
+ansible/inventory/artifacts/
+
 # Ansible
 *.retry
 
