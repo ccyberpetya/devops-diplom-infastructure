@@ -1,12 +1,15 @@
 variable "cloud_id" {
-  type = string
+  description = "Yandex Cloud ID"
+  type        = string
 }
 
 variable "folder_id" {
-  type = string
+  description = "Yandex Cloud Folder ID"
+  type        = string
 }
 
 variable "default_zone" {
-  type    = string
-  default = "ru-central1-a"
+  description = "Default availability zone"
+  type        = string
+  default     = "ru-central1-a"
 }
