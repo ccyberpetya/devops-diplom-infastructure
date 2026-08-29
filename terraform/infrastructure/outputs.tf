@@ -24,3 +24,13 @@ output "nlb_public_ip" {
     one(listener.external_address_spec).address
   ])
 }
+
+output "container_registry_id" {
+  description = "Yandex Container Registry ID"
+  value       = yandex_container_registry.app.id
+}
+
+output "container_repository" {
+  description = "Application container repository"
+  value       = yandex_container_repository.app.name
+}

@@ -49,3 +49,9 @@ resource "yandex_storage_bucket" "terraform_state" {
     enabled = true
   }
 }
+
+resource "yandex_resourcemanager_folder_iam_member" "terraform_sa_container_registry_editor" {
+  folder_id = var.folder_id
+  role      = "container-registry.editor"
+  member    = "serviceAccount:${yandex_iam_service_account.terraform_sa.id}"
+}
