@@ -55,3 +55,15 @@ resource "yandex_resourcemanager_folder_iam_member" "terraform_sa_container_regi
   role      = "container-registry.editor"
   member    = "serviceAccount:${yandex_iam_service_account.terraform_sa.id}"
 }
+
+resource "yandex_iam_service_account" "k8s_registry_puller" {
+  name        = "k8s-registry-puller"
+  description = "Service account for pulling images from Yandex Container Registry"
+  folder_id   = var.folder_id
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "k8s_registry_puller" {
+  folder_id = var.folder_id
+  role      = "container-registry.images.puller"
+  member    = "serviceAccount:${yandex_iam_service_account.k8s_registry_puller.id}"
+}

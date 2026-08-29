@@ -3,18 +3,27 @@ kind: Deployment
 metadata:
   name: test-app
   namespace: default
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: test-app
+
   template:
     metadata:
       labels:
         app: test-app
+
     spec:
+      imagePullSecrets:
+        - name: yc-registry-secret
+
       containers:
-        - name: nginx
-          image: nginx:1.27-alpine
+        - name: app
+          image: cr.yandex/crpg41djdneo0p55bo44/devops-dip-app:1.0.0
+          imagePullPolicy: IfNotPresent
+
           ports:
             - containerPort: 80
