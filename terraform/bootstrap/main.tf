@@ -29,3 +29,8 @@ resource "yandex_storage_bucket" "terraform_state" {
     enabled = true
   }
 }
+resource "yandex_resourcemanager_folder_iam_member" "terraform_sa_vpc_admin" {
+  folder_id = var.folder_id
+  role      = "vpc.admin"
+  member    = "serviceAccount:${yandex_iam_service_account.terraform_sa.id}"
+}
