@@ -15,3 +15,12 @@ output "k8s_external_ips" {
     name => instance.network_interface[0].nat_ip_address
   }
 }
+
+output "nlb_public_ip" {
+  description = "Public IP address of Kubernetes Network Load Balancer"
+
+  value = one([
+    for listener in yandex_lb_network_load_balancer.k8s.listener :
+    one(listener.external_address_spec).address
+  ])
+}

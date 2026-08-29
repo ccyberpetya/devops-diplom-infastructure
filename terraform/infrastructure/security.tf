@@ -61,4 +61,18 @@ resource "yandex_vpc_security_group" "worker" {
     protocol       = "ANY"
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    description    = "HTTP traffic from NLB to Traefik NodePort"
+    protocol       = "TCP"
+    port           = 30080
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description       = "Yandex NLB health checks"
+    protocol          = "TCP"
+    port              = 30080
+    predefined_target = "loadbalancer_healthchecks"
+  }
 }

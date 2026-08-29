@@ -1,0 +1,18 @@
+deployment:
+  replicas: 2
+
+service:
+  spec:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+
+ports:
+  web:
+    nodePort: 30080
+
+  websecure:
+    nodePort: 30443
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
