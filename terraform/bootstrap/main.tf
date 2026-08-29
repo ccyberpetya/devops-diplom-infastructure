@@ -67,3 +67,16 @@ resource "yandex_resourcemanager_folder_iam_member" "k8s_registry_puller" {
   role      = "container-registry.images.puller"
   member    = "serviceAccount:${yandex_iam_service_account.k8s_registry_puller.id}"
 }
+
+
+resource "yandex_iam_service_account" "github_ycr_pusher" {
+  name        = "github-ycr-pusher"
+  description = "Service account for GitHub Actions to push Docker images"
+  folder_id   = var.folder_id
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "github_ycr_pusher" {
+  folder_id = var.folder_id
+  role      = "container-registry.images.pusher"
+  member    = "serviceAccount:${yandex_iam_service_account.github_ycr_pusher.id}"
+}
