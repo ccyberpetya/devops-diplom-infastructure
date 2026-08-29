@@ -1,0 +1,22 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+
+# Credentials
+*.pem
+*.key
+*service-account*.json
+kubeconfig
+.kube/
+
+# Ansible
+*.retry
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
